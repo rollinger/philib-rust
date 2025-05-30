@@ -1,6 +1,12 @@
 Phi-Lib-Rust
 My utilities in Rust.
 
+# Tests
+cargo test
+
+# Benchmarks
+cargo run --features benchmark
+
 
 #![no_std]: only core is allowed.
 You can use everything in core, such as:

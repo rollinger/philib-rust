@@ -14,7 +14,7 @@ pub static FACTORIALS: [u128; 35] = [
 
 pub fn factorial_iterative(nb: u128) -> u128 {
 	// factorial_iterative(0...35) took 4.587µs.
-    let mut nb = nb;
+    let mut nb: u128 = nb;
     let mut f: u128 = 1;
     while nb > 0 {
         f = f * nb;
@@ -62,7 +62,6 @@ pub fn factorial(number: u8) -> u128 {
 #[cfg(test)]
 mod tests {
     use super::*;
-	use crate::performance::benchmark;
 
     #[test]
     fn factorial_initial_test() {
@@ -81,25 +80,74 @@ mod tests {
 			assert_eq!(factorial_iterative(nb), factorial_fake(nb));
 		}
 	}
+}
 
-	#[test]
-	fn lower_factorial_speed_test() {
-		let test_functions: [(&str, fn(u128) -> u128); 4] = [
-			("factorial_iterative", factorial_iterative), 
-			("factorial_recursive", factorial_recursive),
-			("factorial_std", factorial_std),
-			("factorial_fake", factorial_fake),
-		];
-		
-		for (name, function) in test_functions.iter() {
-			let time_ns = benchmark::single_run(|| {
-				let nbrs = 0..35;
-				for n in nbrs {
-					function(n);
-				}
-			});
-			println!("Single run {name}(0...34) took: {:.2} ns", time_ns);
-		}
-		
+pub mod benchmarks {
+	use super::*;
+	use crate::performance::benchmark;
+
+	pub fn bench_factorial_iterative() {
+		let single_time_ns = benchmark::single_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_iterative(n);
+			}
+		});
+		let count_in_100ms = benchmark::timed_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_iterative(n);
+			}
+		}, 100);
+		//return "factorial_iterative", single_time_ns, count_in_100ms;
+		println!("Bench: factorial_iterative(0...34): single-run {:.2} ns; 100ms-run {} times", single_time_ns, count_in_100ms);
+	}
+
+	pub fn bench_factorial_recursive() {
+		let single_time_ns = benchmark::single_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_recursive(n);
+			}
+		});
+		let count_in_100ms = benchmark::timed_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_recursive(n);
+			}
+		}, 100);
+		println!("Bench: factorial_recursive(0...34): single-run {:.2} ns; 100ms-run {} times", single_time_ns, count_in_100ms);
+	}
+
+	pub fn bench_factorial_std() {
+		let single_time_ns = benchmark::single_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_std(n);
+			}
+		});
+		let count_in_100ms = benchmark::timed_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_std(n);
+			}
+		}, 100);
+		println!("Bench: factorial_std(0...34): single-run {:.2} ns; 100ms-run {} times", single_time_ns, count_in_100ms);
+	}
+
+	pub fn bench_factorial_fake() {
+		let single_time_ns = benchmark::single_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_fake(n);
+			}
+		});
+		let count_in_100ms = benchmark::timed_run(|| {
+			let test_numbers = 0..35;
+			for n in test_numbers {
+				factorial_fake(n);
+			}
+		}, 100);
+		println!("Bench: factorial_fake(0...34): single-run {:.2} ns; 100ms-run {} times", single_time_ns, count_in_100ms);
 	}
 }
