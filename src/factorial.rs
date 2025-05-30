@@ -58,13 +58,14 @@ pub fn factorial(number: u8) -> u128 {
 	}
 }
 
+
 #[cfg(test)]
 mod tests {
     use super::*;
-	use std::time::Instant;
+	use crate::performance::benchmark;
 
     #[test]
-    fn factorial_10_test() {
+    fn factorial_initial_test() {
 		let nbr_sets = [(0,1),(1,1),(2,2),(3,6),(4,24),(5,120),(6,720),(7,5040),(8,40320),(9,362880),(10,3628800)];
 		for set in nbr_sets {
 			assert_eq!(factorial_iterative(set.0), set.1);
@@ -74,7 +75,7 @@ mod tests {
     }
 
 	#[test]
-	fn fake_factorials_equal_interative() {
+	fn fake_factorials_equal_iterative() {
 		let nbrs = 0..35;
 		for nb in nbrs {
 			assert_eq!(factorial_iterative(nb), factorial_fake(nb));
@@ -91,31 +92,14 @@ mod tests {
 		];
 		
 		for (name, function) in test_functions.iter() {
-			let nbrs = 0..35;
-			let start = Instant::now();
-			for n in nbrs {
-				function(n);
-			}
-			let duration = start.elapsed();
-			println!("{name}(0...34) took {duration:?}.")
+			let time_ns = benchmark::single_run(|| {
+				let nbrs = 0..35;
+				for n in nbrs {
+					function(n);
+				}
+			});
+			println!("Single run {name}(0...34) took: {:.2} ns", time_ns);
 		}
 		
-	}
-}
-
-#[cfg(benchmark)]
-mod benchmarks {
-    use super::*;
-	use std::time::Instant;
-
-	#[benchmark]
-	fn factorial_benchmark() {
-		let nbrs = 0..35;
-		let start = Instant::now();
-		for n in nbrs {
-			function(n);
-		}
-		let duration = start.elapsed();
-		println!("{name}(0...34) took {duration:?}.")
 	}
 }
