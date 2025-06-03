@@ -18,5 +18,7 @@ fn main() {
 	println!("{stem:?}");
 	// Levenshtein Distance
 	let ldist_unicode = levenshtein::distance::unicode_edit_distance(&s1, &s2);
-	println!("Unicode Levenshtein Distance: {ldist_unicode}")
+	println!("Unicode Levenshtein Distance: {ldist_unicode}");
+	let ldist_bytes = levenshtein::distance::byte_edit_distance(&s1, &s2);
+	println!("Byte Levenshtein Distance: {ldist_bytes}");
 }
