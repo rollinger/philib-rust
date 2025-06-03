@@ -31,3 +31,28 @@ where
 	}
 	return count;
 }
+
+pub fn average_run<F>(mut code_block: F, n: u64) -> f64
+where
+	F: FnMut(),
+{
+	// Runs a code block n times (repeat)
+	// returns the average time per call.
+	let start = Instant::now();
+	for _ in 0..n {
+		code_block();
+	}
+	let duration = start.elapsed();
+	// return duration converted to nanoseconds
+	let avg: f64 = duration.as_secs_f64() * 1e9 / (n as f64);
+	return avg;
+}
+
+pub fn benchmark_metric<F>(mut code_block: F) -> (f64, u128)
+where
+	F: FnMut(),
+{
+	let avg: f64 = average_run(&mut code_block, 100);
+	let timed: u128 = timed_run(&mut code_block, 100);
+	return (avg, timed);
+}

@@ -11,3 +11,4 @@ path = "src/lib.rs"
 [features]
 
 [dependencies]
+rand = "0.8"
