@@ -1,4 +1,5 @@
 // NCSim Membrane
+#![allow(dead_code)]
 
 pub mod membrane {
 

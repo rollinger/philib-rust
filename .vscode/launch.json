@@ -1,0 +1,175 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug unit tests in library 'philib-rust'",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--lib",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "philib-rust",
+					"kind": "lib"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug executable 'philib-rust'",
+			"cargo": {
+				"args": [
+					"build",
+					"--bin=philib-rust",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "philib-rust",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug unit tests in executable 'philib-rust'",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--bin=philib-rust",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "philib-rust",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug executable 'ncsim'",
+			"cargo": {
+				"args": [
+					"build",
+					"--bin=ncsim",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "ncsim",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug unit tests in executable 'ncsim'",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--bin=ncsim",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "ncsim",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug executable 'levenshtein'",
+			"cargo": {
+				"args": [
+					"build",
+					"--bin=levenshtein",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "levenshtein",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug unit tests in executable 'levenshtein'",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--bin=levenshtein",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "levenshtein",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug executable 'bench'",
+			"cargo": {
+				"args": [
+					"build",
+					"--bin=bench",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "bench",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug unit tests in executable 'bench'",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--bin=bench",
+					"--package=philib-rust"
+				],
+				"filter": {
+					"name": "bench",
+					"kind": "bin"
+				}
+			},
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		}
+	]
+}
